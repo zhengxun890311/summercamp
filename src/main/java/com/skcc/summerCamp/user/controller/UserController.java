@@ -154,7 +154,7 @@ public class UserController {
 	public String login(@ModelAttribute("userObj") User userObj,
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo, HttpSession session, Model model) {
 		boolean check = userService.authenticateUser(userObj.getUser_email(), userObj.getPassword());
-		System.out.println(1111232132);
+		System.out.println("hello world");
 		if (check) {
 			User user = userService.findByEmail(userObj.getUser_email());
 			session.setAttribute("userEmail", user.getUser_email());
