@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    height:100%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #038118;
+    position: absolute;
+    height: 100%;
+    overflow: auto;
+}
+h2{
+    color: white;
+}
+li a {
+    display: block;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color:orange;
+    color: white;
+}
+li a.active:hover {
+	background-color:yellow;
+}
+
+li a:hover:not(.active) {
+    background-color: yellow;
+    color:orange;
+}

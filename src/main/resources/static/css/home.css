@@ -1,0 +1,52 @@
+
+#container{
+    font-family: Arial, Helvetica, sans-serif;
+    width:1570px;
+    background-color:white;
+    height: 750px;
+    margin: 0 auto;
+    padding: 10px;
+    display:inline-block;
+}
+#div_navi{
+	width:30%;
+	height:100%;
+	background-color:white;
+	display:inline-block;
+	vertical-align: top;
+}
+#content{
+	background-color:white;
+	height:100%;
+	width:65%;
+	display:inline-block;
+}
+#title{
+	width:100%;
+	height:10%;
+	background-color: white;
+	margin-top: 0;
+}
+#left_div{
+	border-left:2px solid #CCCCCC;
+	margin-left:5%;
+	width:45%;
+	height:90%;
+	background-color: white;
+	display:inline-block;
+	vertical-align: top;
+}
+#right_div{
+	width:45%;
+	height:90%;
+	background-color: white;
+	display:inline-block;
+}
+.NewTable{
+	font-size: 14px;
+	height:700px;
+	width:1000px;
+	text-align: center;
+	border:solid #cccccc;
+	border-width:1px 0 0 1px;
+}
