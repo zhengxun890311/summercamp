@@ -27,20 +27,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
-	@Size(min=2,max=200)
+	@Size(min=2,max=200,message="First name is at least 2 characters")
 	private String user_first_name;
 	
-	@NotEmpty
-	@Size(min=2,max=200)
+	@Size(min=2,max=200,message="Last name is at least 2 characters")
 	private String user_last_name;
 	
-	@NotEmpty
-	@Size(min=7,max=300)
+	@NotEmpty(message = "Email cannot be empty")
 	private String user_email;
 	
-	
-	
+
 	private String password;
 	
 	@Transient
