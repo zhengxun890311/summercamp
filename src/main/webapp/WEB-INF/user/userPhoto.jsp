@@ -61,7 +61,7 @@
 							<input id="myfile" name="myfile" type="file" path="user_photo_path" class="form-control" />
 						</div>
 					</p>
-					<img id="image" src="${userPhoto.user_photo_path}" id="img" style="width: 20rem;height: 15rem;">
+					<img id="img" src="${userPhoto.user_photo_path}" id="img" style="width: 50rem;height: 428px;border-radius:46px;border-color:#038118;">
 					<input id="success_btn" class="btn btn-success" type="submit"
 						value="next" />
 					<br><br>
@@ -77,10 +77,12 @@
 			$("#user_email").attr("disabled",true);
 			$("#createdAt").attr("disabled",true);
 			$("#info_btn").hide();
+			if($("#img").val()==null|| $("#img").val().length==0||$("#img").val()==''){
+				$("#img").attr("src","http://cdn.onlinewebfonts.com/svg/img_210318.png");
+			}
 			if($("#hidPhoto").val().length>0){
 				$("#info_btn").show();
 				$("#success_btn").hide();
-				$("#myfile").hide();
 			}
 			
 			$("#myfile").change(function(){
