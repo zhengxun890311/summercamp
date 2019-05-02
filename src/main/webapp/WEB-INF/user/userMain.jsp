@@ -47,8 +47,12 @@
 				
 					</p>
 					<p>
-							<form:label path="user_birth">Date</form:label>
-							<form:input id="date" type="text" class="form-control" placeholder="please input birthday" path ="user_birth"/>
+							<form:label path="user_birth">Birthday 
+								<span style="color:red;">
+									<i>*Remind:Age is atleast 13</i>
+								</span>
+							</form:label>
+							<form:input id="birthday" type="date" path="user_birth" class="form-control form-control-sm"/>
 					</p>
 					<p>
 							<form:label path="user_street">Street:</form:label>
@@ -77,11 +81,25 @@
 	</div>
 	<script>
 		$(document).ready(function(){
+			var date = new Date();
+			var year = date.getFullYear()-13;
+			var month = ''+(date.getMonth()+1);
+			var day = ''+date.getDate();
+			if(month.length<2){
+				month="0"+month;
+			}
+			if(day.length<2){
+				day="0"+day;
+			}
+			var date = [year, month, day].join('-');
+			$("#birthday").attr("max",date);
+			
 			$("#user_first_name").attr("disabled",true);
 			$("#user_last_name").attr("disabled",true);
 			$("#user_email").attr("disabled",true);
 			$("#createdAt").attr("disabled",true);
 			$("#info_btn").hide();
+			
 			if($("#phone").val().length>0){
 				$("#phone").attr("disabled",true);
 				$("#success_btn").hide();
