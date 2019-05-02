@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -253,9 +252,23 @@ public class UserController {
 		UserCommon userCommon = new UserCommon();
 		userCommon.setUserInfo(user, userObj);
 		UserPhoto newUserPhoto = userPhotoService.findUserPhoto((Long) session.getAttribute("userId"));
-		System.out.println(newUserPhoto.getUser_photo_path());
-		System.out.println(newUserPhoto.getUser_photo_path());
-		model.addAttribute("userPhoto", newUserPhoto);
+		if(newUserPhoto==null) {
+			UserPhoto newPhoto = new UserPhoto();
+			newPhoto.setUser(user);
+			newPhoto.setUser_photo_path("");
+			model.addAttribute("userPhoto", newPhoto);
+		}
+		else {
+			model.addAttribute("userPhoto", newUserPhoto);
+		}
 		return "/user/userPhoto.jsp";
+	}
+	@RequestMapping("/goHome")
+	public String goHome(HttpSession session,Model model) {
+		User user = userService.findByEmail(session.getAttribute("userEmail").toString());
+		UserBasicInfo newUserBasicInfo = userBasicInfoService.findUserBasicInfoById((Long)session.getAttribute("userId"));
+		model.addAttribute("userBasicInfo", newUserBasicInfo);
+		model.addAttribute("userObj", user);
+		return "/user/userMain.jsp";
 	}
 }

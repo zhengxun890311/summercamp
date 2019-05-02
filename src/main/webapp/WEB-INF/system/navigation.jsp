@@ -12,8 +12,8 @@
 </head>
 <body>
 	<ul>
-		<li><a class="active" href="#home">Home</a></li>
-		<li><a>${userFirstName}</a></li>
+		<li><a class="active" href="/goHome">Home</a></li>
+		<li><a hre="/">${userFirstName}</a></li>
 		<li><a href="/userInfo">Personal Information</a></li>
 		<li><a href="#about">Application</a></li>
 		<li><a href="#about">Status checking</a></li>
