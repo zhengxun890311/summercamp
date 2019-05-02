@@ -12,6 +12,7 @@
 </head>
 <body id="body">
 	<fieldset>
+	<p><form:errors path="userObj.*"/></p>
 		<form:form method="POST" action="/register" modelAttribute="userObj">
 			<p>
 				<form:label path="user_first_name">first name</form:label>

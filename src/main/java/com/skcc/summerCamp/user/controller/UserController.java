@@ -64,9 +64,10 @@ public class UserController {
 
 	// register new user
 	@PostMapping("/register")
-	public String createUser(@ModelAttribute("userObj") User userObj, HttpSession session, BindingResult result,
+	public String createUser(@Valid @ModelAttribute("userObj") User userObj,BindingResult result, HttpSession session, 
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo) {
 		userValidator.validate(userObj, result);
+		System.out.println(result.hasErrors());
 		if (result.hasErrors()) {
 			return "/user/login.jsp";
 		}
@@ -154,8 +155,6 @@ public class UserController {
 	public String login(@ModelAttribute("userObj") User userObj,
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo, HttpSession session, Model model) {
 		boolean check = userService.authenticateUser(userObj.getUser_email(), userObj.getPassword());
-		System.out.println("hello world");
-		System.out.println("this is skyler");
 		if (check) {
 			User user = userService.findByEmail(userObj.getUser_email());
 			session.setAttribute("userEmail", user.getUser_email());
@@ -190,9 +189,18 @@ public class UserController {
 		userCommon.setUserInfo(user, userObj);
 		UserUniversityInfo newUserUniversityInfo = userUniversityservice
 				.findUserUnivesityInfo((Long) session.getAttribute("userId"));
-		System.out.println(newUserUniversityInfo.getUser_university());
-		System.out.println(newUserUniversityInfo.getUser_university());
-		model.addAttribute("userUniversityInfo", newUserUniversityInfo);
+		if(newUserUniversityInfo==null) {
+			UserUniversityInfo u1 = new UserUniversityInfo();
+			u1.setUser_university("");
+			u1.setUser_university_date("");
+			u1.setUser_major("");
+			u1.setUser_grade("");
+			u1.setUser(user);
+			model.addAttribute("userUniversityInfo", u1);
+		}
+		else {
+			model.addAttribute("userUniversityInfo", newUserUniversityInfo);
+		}
 		return "/user/userUniversity.jsp";
 	}
 
@@ -203,7 +211,15 @@ public class UserController {
 		userCommon.setUserInfo(user, userObj);
 		UserResumeHobby newUserResumeHobby = userResumeHobbyService
 				.findResumeHobby((Long) session.getAttribute("userId"));
-		model.addAttribute("userResumeHobby", newUserResumeHobby);
+		if(newUserResumeHobby==null) {
+			UserResumeHobby newResume = new UserResumeHobby();
+			newResume.setUser_resume("");
+			newResume.setUser_hobby("");
+			model.addAttribute("userResumeHobby", newResume);
+		}
+		else {
+			model.addAttribute("userResumeHobby", newUserResumeHobby);
+		}
 		return "/user/userResume.jsp";
 	}
 
@@ -217,7 +233,15 @@ public class UserController {
 		userCommon.setUserInfo(user, userObj);
 		UserReasonComment newUserReasonComment = userReasonCommentService
 				.findUserReasonComment((Long) session.getAttribute("userId"));
-		model.addAttribute("userReasonComment", newUserReasonComment);
+		if(newUserReasonComment==null) {
+			UserReasonComment newReason = new UserReasonComment();
+			newReason.setUser_comment("");
+			newReason.setUser_reason("");
+			model.addAttribute("userReasonComment", newReason);
+		}
+		else {
+			model.addAttribute("userReasonComment", newUserReasonComment);
+		}
 		return "/user/userReasonComment.jsp";
 	}
 	
