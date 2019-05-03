@@ -147,7 +147,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "/user/login.jsp";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/login")
@@ -164,13 +164,26 @@ public class UserController {
 			UserCommon userCommon = new UserCommon();
 			userCommon.setUserInfo(user, userObj);
 			UserBasicInfo newUserBasicInfo = userBasicInfoService.findUserBasicInfoById(user.getId());
-			userBasicInfo.setUser_phone(newUserBasicInfo.getUser_phone());
-			userBasicInfo.setUser_birth(newUserBasicInfo.getUser_birth());
-			userBasicInfo.setUser_street(newUserBasicInfo.getUser_street());
-			userBasicInfo.setUser_city(newUserBasicInfo.getUser_city());
-			userBasicInfo.setUser_state(newUserBasicInfo.getUser_state());
-			userBasicInfo.setUser_zip(newUserBasicInfo.getUser_zip());
-			model.addAttribute("newUserBasicInfo", newUserBasicInfo);
+			if(newUserBasicInfo==null) {
+				UserBasicInfo newBasic = new UserBasicInfo();
+				newBasic.setUser_birth("");
+				newBasic.setUser_city("");
+				newBasic.setUser_phone("");
+				newBasic.setUser_state("");
+				newBasic.setUser_street("");
+				newBasic.setUser_zip("");
+				newBasic.setUser(user);
+				model.addAttribute("newUserBasicInfo", newBasic);
+			}
+			else {
+				userBasicInfo.setUser_phone(newUserBasicInfo.getUser_phone());
+				userBasicInfo.setUser_birth(newUserBasicInfo.getUser_birth());
+				userBasicInfo.setUser_street(newUserBasicInfo.getUser_street());
+				userBasicInfo.setUser_city(newUserBasicInfo.getUser_city());
+				userBasicInfo.setUser_state(newUserBasicInfo.getUser_state());
+				userBasicInfo.setUser_zip(newUserBasicInfo.getUser_zip());
+				model.addAttribute("newUserBasicInfo", newUserBasicInfo);
+			}
 			return "/user/userMain.jsp";
 		} else {
 			model.addAttribute("errors", "Please input correct email and password");
