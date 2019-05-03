@@ -20,8 +20,9 @@
 		</div>
 		<div id="content">
 			<div id="title">
-				<h1>Registration</h1>
+				<h1 style="margin-top:0px;margin-bottom: 0px;">Registration</h1>
 			</div>
+			<div id="info_div">
 				<form:form modelAttribute="userObj">
 					<p>
 							<form:label path="user_first_name">First name</form:label>
@@ -42,6 +43,7 @@
 				</form:form>
 				<form:form method="post" action="/addUserBasicInfo" modelAttribute="userBasicInfo">
 					<p>
+							<p><form:errors path="userBasicInfo.*"/></p>
 							<form:label path="user_phone">Phone:</form:label>
 							<form:input id="phone" type="text" class="form-control" placeholder="please input phone number" path="user_phone" ></form:input>
 				
@@ -49,7 +51,7 @@
 					<p>
 							<form:label path="user_birth">Birthday 
 								<span style="color:red;">
-									<i>*Remind:Age is atleast 13</i>
+									<i>*Remind:The minumum age is 13</i>
 								</span>
 							</form:label>
 							<form:input id="birthday" type="date" path="user_birth" class="form-control form-control-sm"/>
@@ -77,6 +79,7 @@
 						<input id="success_btn" class="btn btn-success" type="submit" value="Next"/>
 						<input id="info_btn" onClick="window.location.href='/findUnivesityInfo'" class="btn btn-info" type="button" value="Next(Submitted)"/>
 				</form:form>
+			</div>
 		</div>
 	</div>
 	<script>

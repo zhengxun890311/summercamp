@@ -50,3 +50,9 @@
 	border:solid #cccccc;
 	border-width:1px 0 0 1px;
 }
+#info_div{
+	width:900px;
+	height:725px;
+	top:60px;
+	position:absolute;
+}
