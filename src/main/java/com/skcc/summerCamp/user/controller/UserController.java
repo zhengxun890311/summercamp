@@ -78,19 +78,39 @@ public class UserController {
 		session.setAttribute("password", user.getUser_last_name());
 		return "/user/userMain.jsp";
 	}
-
+	
+	//create userbasic information
 	@PostMapping("/addUserBasicInfo")
 	public String addUserBasicInfo(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo,
-			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo, HttpSession session) {
-		UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
+			BindingResult result,
+			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo, 
+			HttpSession session,Model model) {
+		userValidator.validateUserBasicInfo(userBasicInfo, result);
+		if(result.hasErrors()) {
+			model.addAttribute("userObj", user);
+			return "/user/userMain.jsp";
+		}
+		UserBasicInfo findUserBasicInfo = userBasicInfoService.findUserBasicInfoById((Long)(session.getAttribute("userId")));
+		if(findUserBasicInfo.getUser_phone().length()>0) {
+			userBasicInfo.setUser(user);
+			userBasicInfoService.updateUserBasicInfo(userBasicInfo);
+		}
+		else {
+			UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
+		}
 		return "/user/userUniversity.jsp";
 	}
 
 	@PostMapping("/addUserUniversityInfo")
 	public String addUserUniversityInfo(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo,
+			BindingResult result,
 			@ModelAttribute("userResumeHobby") UserResumeHobby userResumeHobby, HttpSession session) {
+		userValidator.validateUniversityInfo(userUniversityInfo, result);
+		if(result.hasErrors()) {
+			return "/user/userUniversity.jsp";
+		}
 		UserUniversityInfo newUserUniversityInfo = userUniversityservice.createUserUniversity(session,
 				userUniversityInfo);
 		return "/user/userResume.jsp";
@@ -147,7 +167,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "/user/login.jsp";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/login")
@@ -164,13 +184,26 @@ public class UserController {
 			UserCommon userCommon = new UserCommon();
 			userCommon.setUserInfo(user, userObj);
 			UserBasicInfo newUserBasicInfo = userBasicInfoService.findUserBasicInfoById(user.getId());
-			userBasicInfo.setUser_phone(newUserBasicInfo.getUser_phone());
-			userBasicInfo.setUser_birth(newUserBasicInfo.getUser_birth());
-			userBasicInfo.setUser_street(newUserBasicInfo.getUser_street());
-			userBasicInfo.setUser_city(newUserBasicInfo.getUser_city());
-			userBasicInfo.setUser_state(newUserBasicInfo.getUser_state());
-			userBasicInfo.setUser_zip(newUserBasicInfo.getUser_zip());
-			model.addAttribute("newUserBasicInfo", newUserBasicInfo);
+			if(newUserBasicInfo==null) {
+				UserBasicInfo newBasic = new UserBasicInfo();
+				newBasic.setUser_birth("");
+				newBasic.setUser_city("");
+				newBasic.setUser_phone("");
+				newBasic.setUser_state("");
+				newBasic.setUser_street("");
+				newBasic.setUser_zip("");
+				newBasic.setUser(user);
+				model.addAttribute("newUserBasicInfo", newBasic);
+			}
+			else {
+				userBasicInfo.setUser_phone(newUserBasicInfo.getUser_phone());
+				userBasicInfo.setUser_birth(newUserBasicInfo.getUser_birth());
+				userBasicInfo.setUser_street(newUserBasicInfo.getUser_street());
+				userBasicInfo.setUser_city(newUserBasicInfo.getUser_city());
+				userBasicInfo.setUser_state(newUserBasicInfo.getUser_state());
+				userBasicInfo.setUser_zip(newUserBasicInfo.getUser_zip());
+				model.addAttribute("newUserBasicInfo", newUserBasicInfo);
+			}
 			return "/user/userMain.jsp";
 		} else {
 			model.addAttribute("errors", "Please input correct email and password");

@@ -12,6 +12,11 @@ public class UserCommon {
 	private UserService userService;
 	
 	public static User commonUser(HttpSession session) {
+		if(session==null) {
+			System.out.println("this is null");
+			System.out.println("this is null");
+			System.out.println("this is null");
+		}
 		User user = new User();
 		user.setId((Long)session.getAttribute("userId"));
 		user.setUser_email(session.getAttribute("userEmail").toString());

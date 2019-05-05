@@ -25,4 +25,15 @@ public class UserBasicInfoService {
 	public UserBasicInfo findUserBasicInfoById(Long id) {
 		return userBasicInfoRepository.findUserBasicInfoById(id);
 	}
+	
+	public void updateUserBasicInfo(UserBasicInfo userBasicInfo) {
+		Long id = userBasicInfo.getUser().getId();
+		String user_phone= userBasicInfo.getUser_phone();
+		String user_birth = userBasicInfo.getUser_birth();
+		String user_street = userBasicInfo.getUser_street();
+		String user_city = userBasicInfo.getUser_city();
+		String user_state = userBasicInfo.getUser_state();
+		String user_zip = userBasicInfo.getUser_zip();
+		userBasicInfoRepository.updateUserBasicInfo(id, user_phone, user_birth, user_street, user_city, user_state, user_zip);
+	}
 }
