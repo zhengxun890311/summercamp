@@ -78,19 +78,39 @@ public class UserController {
 		session.setAttribute("password", user.getUser_last_name());
 		return "/user/userMain.jsp";
 	}
-
+	
+	//create userbasic information
 	@PostMapping("/addUserBasicInfo")
 	public String addUserBasicInfo(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo,
-			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo, HttpSession session) {
-		UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
+			BindingResult result,
+			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo, 
+			HttpSession session,Model model) {
+		userValidator.validateUserBasicInfo(userBasicInfo, result);
+		if(result.hasErrors()) {
+			model.addAttribute("userObj", user);
+			return "/user/userMain.jsp";
+		}
+		UserBasicInfo findUserBasicInfo = userBasicInfoService.findUserBasicInfoById((Long)(session.getAttribute("userId")));
+		if(findUserBasicInfo.getUser_phone().length()>0) {
+			userBasicInfo.setUser(user);
+			userBasicInfoService.updateUserBasicInfo(userBasicInfo);
+		}
+		else {
+			UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
+		}
 		return "/user/userUniversity.jsp";
 	}
 
 	@PostMapping("/addUserUniversityInfo")
 	public String addUserUniversityInfo(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userUniversityInfo") UserUniversityInfo userUniversityInfo,
+			BindingResult result,
 			@ModelAttribute("userResumeHobby") UserResumeHobby userResumeHobby, HttpSession session) {
+		userValidator.validateUniversityInfo(userUniversityInfo, result);
+		if(result.hasErrors()) {
+			return "/user/userUniversity.jsp";
+		}
 		UserUniversityInfo newUserUniversityInfo = userUniversityservice.createUserUniversity(session,
 				userUniversityInfo);
 		return "/user/userResume.jsp";

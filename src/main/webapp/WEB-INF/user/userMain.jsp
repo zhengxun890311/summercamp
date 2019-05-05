@@ -23,30 +23,17 @@
 				<h1 style="margin-top:0px;margin-bottom: 0px;">Registration</h1>
 			</div>
 			<div id="info_div">
-				<form:form modelAttribute="userObj">
-					<p>
-							<form:label path="user_first_name">First name</form:label>
-							<form:input id="user_first_name" class="form-control" path="user_first_name" />
-					</p>
-					<p>
-							<form:label path="user_last_name">Last name</form:label>
-							<form:input id="user_last_name" class="form-control" path="user_last_name" />
-					</p>
-					<p>
-							<form:label path="user_email">Email</form:label>
-							<form:input id="user_email" class="form-control" path="user_email" />
-					</p>
-					<p>
-							<form:label path="createdAt">Create Date</form:label>
-							<form:input id="createdAt" class="form-control" path="createdAt" />
-					</p>
-				</form:form>
+				
+				<span style="color:red;">
+					<i>
+						<form:errors id="abc" path="userBasicInfo.*"/>
+					</i>
+				</span>
 				<form:form method="post" action="/addUserBasicInfo" modelAttribute="userBasicInfo">
 					<p>
 							<p><form:errors path="userBasicInfo.*"/></p>
 							<form:label path="user_phone">Phone:</form:label>
 							<form:input id="phone" type="text" class="form-control" placeholder="please input phone number" path="user_phone" ></form:input>
-				
 					</p>
 					<p>
 							<form:label path="user_birth">Birthday 
@@ -96,33 +83,13 @@
 			}
 			var date = [year, month, day].join('-');
 			$("#birthday").attr("max",date);
-			
 			$("#user_first_name").attr("disabled",true);
 			$("#user_last_name").attr("disabled",true);
 			$("#user_email").attr("disabled",true);
 			$("#createdAt").attr("disabled",true);
 			$("#info_btn").hide();
 			
-			if($("#phone").val().length>0){
-				$("#phone").attr("disabled",true);
-				$("#success_btn").hide();
-				$("#info_btn").show(1000);
-			}
-			if($("#date").val().length>0){
-				$("#date").attr("disabled",true);
-			}
-			if($("#street").val().length>0){
-				$("#street").attr("disabled",true);
-			}
-			if($("#city").val().length>0){
-				$("#city").attr("disabled",true);
-			}
-			if($("#state").val().length>0){
-				$("#state").attr("disabled",true);
-			}
-			if($("#zip").val().length>0){
-				$("#zip").attr("disabled",true);
-			}
+			
 		})
 	</script>
 </body>

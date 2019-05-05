@@ -27,7 +27,7 @@ public class UserBasicInfo {
 	private Long id;
 	
 	@NotEmpty
-	@Size(min=11,max=20)
+	@Size(min=10,max=20)
 	private String user_phone;
 	
 	@NotEmpty

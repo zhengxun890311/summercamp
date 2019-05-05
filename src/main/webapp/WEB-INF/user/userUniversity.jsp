@@ -23,24 +23,11 @@
 			<div id="title">
 				<h1>University</h1>
 			</div>
-				<form:form modelAttribute="userObj">
-					<p>
-						<form:label path="user_first_name">First name</form:label>
-						<form:input id="user_first_name" class="form-control" path="user_first_name" />
-					</p>
-					<p>
-						<form:label path="user_last_name">Last name</form:label>
-						<form:input id="user_last_name" class="form-control" path="user_last_name" />
-					</p>
-					<p>
-						<form:label path="user_email">Email:</form:label>
-						<form:input id="user_email" class="form-control" path="user_email" />
-					</p>
-					<p>
-						<form:label path="createdAt">Create Date</form:label>
-						<form:input id="createdAt" class="form-control" path="createdAt" />
-					</p>
-				</form:form>
+				<span style="color:red;">
+					<i>
+						<form:errors id="abc" path="userUniversityInfo.*"/>
+					</i>
+				</span>
 				<form:form method="post" action="/addUserUniversityInfo"
 					modelAttribute="userUniversityInfo">
 					<p>
@@ -54,9 +41,10 @@
 							placeholder="please input major" path="user_major" />
 					</p>
 					<p>
-						<form:label path="user_university_date">Enrollment date:</form:label>
-						<form:input id="enrollment" type="text" class="form-control"
-							placeholder="please input street number" path="user_university_date" />
+						<form:label path="user_university_date">
+							Enrollment date:
+						</form:label>
+						<form:input id="enrollment" type="date" class="form-control" path="user_university_date" />
 					</p>
 					<p>
 						<form:label path="user_grade">Grade:</form:label>
@@ -70,25 +58,7 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			$("#user_first_name").attr("disabled",true);
-			$("#user_last_name").attr("disabled",true);
-			$("#user_email").attr("disabled",true);
-			$("#createdAt").attr("disabled",true);
 			$("#info_btn").hide();
-			if($("#university").val().length>0){
-				$("#university").attr("disabled",true);
-				$("#success_btn").hide();
-				$("#info_btn").show();
-			}
-			if($("#major").val().length>0){
-				$("#major").attr("disabled",true);
-			}
-			if($("#enrollment").val().length>0){
-				$("#enrollment").attr("disabled",true);
-			}
-			if($("#grade").val().length>0){
-				$("#grade").attr("disabled",true);
-			}
 		})
 	</script>
 </body>
