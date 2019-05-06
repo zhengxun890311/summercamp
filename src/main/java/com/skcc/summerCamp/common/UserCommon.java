@@ -32,4 +32,10 @@ public class UserCommon {
 		userObj.setUser_email(user.getUser_email());
 		userObj.setCreatedAt(user.getCreatedAt());
 	}
+	//get user id
+	public User getId(Long userId) {
+		User user = new User();
+		user.setId(userId);
+		return user;
+	}
 }
