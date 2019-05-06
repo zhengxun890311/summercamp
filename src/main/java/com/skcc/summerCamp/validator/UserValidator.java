@@ -54,7 +54,9 @@ public class UserValidator implements Validator {
 	public void validateUniversityInfo(Object target,Errors errors) {
 		UserUniversityInfo userUniversityInfo = (UserUniversityInfo)target;
 		String university = " /([A-Z][^\\s,.]+[.]?\\s[(]?)*(College|University|Institute|Law School|School of|Academy)[^,\\d]*(?=,|\\d)/";
-		if(!Pattern.matches(university, userUniversityInfo.getUser_university())) {
+		if(userUniversityInfo.getUser_university().length()<1||
+			userUniversityInfo.getUser_university()==null||
+			userUniversityInfo.getUser_university()=="") {
 			errors.rejectValue("user_university","Match");
 		}
 		if(userUniversityInfo.getUser_major().length()<1) {

@@ -27,7 +27,11 @@ public class UserBasicInfoService {
 	}
 	
 	public void updateUserBasicInfo(UserBasicInfo userBasicInfo) {
+		System.out.println(userBasicInfo.getUser_street());
+		System.out.println(userBasicInfo.getUser_street());
+		System.out.println(userBasicInfo.getUser_street());
 		Long id = userBasicInfo.getUser().getId();
+		System.out.println("id is "+userBasicInfo.getUser().getId());
 		String user_phone= userBasicInfo.getUser_phone();
 		String user_birth = userBasicInfo.getUser_birth();
 		String user_street = userBasicInfo.getUser_street();

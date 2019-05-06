@@ -56,6 +56,8 @@ public class UserController {
 	@Autowired
 	private UserValidator userValidator;
 
+	//UserCommon is a common function
+	UserCommon userCommon = new UserCommon();
 	@RequestMapping("/")
 	public String index(@ModelAttribute("userObj") User user) {
 		return "/user/login.jsp";
@@ -66,7 +68,6 @@ public class UserController {
 	public String createUser(@Valid @ModelAttribute("userObj") User userObj,BindingResult result, HttpSession session, 
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo) {
 		userValidator.validate(userObj, result);
-		System.out.println(result.hasErrors());
 		if (result.hasErrors()) {
 			return "/user/login.jsp";
 		}
@@ -79,7 +80,7 @@ public class UserController {
 		return "/user/userMain.jsp";
 	}
 	
-	//create userbasic information
+	//create or update userbasic information
 	@PostMapping("/addUserBasicInfo")
 	public String addUserBasicInfo(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userBasicInfo") UserBasicInfo userBasicInfo,
@@ -92,9 +93,9 @@ public class UserController {
 			return "/user/userMain.jsp";
 		}
 		UserBasicInfo findUserBasicInfo = userBasicInfoService.findUserBasicInfoById((Long)(session.getAttribute("userId")));
-		if(findUserBasicInfo.getUser_phone().length()>0) {
-			userBasicInfo.setUser(user);
-			userBasicInfoService.updateUserBasicInfo(userBasicInfo);
+		if(findUserBasicInfo!=null) {
+				userBasicInfo.setUser(userCommon.getId((Long)session.getAttribute("userId")));
+				userBasicInfoService.updateUserBasicInfo(userBasicInfo);
 		}
 		else {
 			UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
@@ -111,8 +112,14 @@ public class UserController {
 		if(result.hasErrors()) {
 			return "/user/userUniversity.jsp";
 		}
-		UserUniversityInfo newUserUniversityInfo = userUniversityservice.createUserUniversity(session,
-				userUniversityInfo);
+		UserUniversityInfo findUserUniversityInfo = userUniversityservice.findUserUnivesityInfo((Long)(session.getAttribute("userId")));
+		if(findUserUniversityInfo!=null) {
+			userUniversityInfo.setUser(userCommon.getId((Long)session.getAttribute("userId")));
+			userUniversityservice.updateUserUnivesityInfo(userUniversityInfo);
+		}
+		else {
+			userUniversityservice.createUserUniversity(session, userUniversityInfo);
+		}
 		return "/user/userResume.jsp";
 	}
 
@@ -153,7 +160,6 @@ public class UserController {
 		}
 		String url = "images/" + random_photo_name + "." + "jpg";
 		userPhotoService.createUserPhoto(url, session);
-		System.out.println("database url is：" + url);
 		return "redirect:userInfo";
 	}
 
