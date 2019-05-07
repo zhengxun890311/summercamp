@@ -125,9 +125,23 @@ public class UserController {
 
 	@PostMapping("/addUserResumeHobby")
 	public String addUserResumeHobby(@ModelAttribute("userObj") User user,
+			BindingResult result,
 			@ModelAttribute("userResumeHobby") UserResumeHobby userResumeHobby,
 			@ModelAttribute("userReasonComment") UserReasonComment userReasonComment, HttpSession session) {
-		userResumeHobbyService.creteUserResumeHobby(session, userResumeHobby);
+			
+		userValidator.validateResumeHobby(userResumeHobby, result);
+		if(result.hasErrors()) {
+			return "/user/userResume.jsp";
+		}
+		UserResumeHobby findUserResumeHobby = userResumeHobbyService.findResumeHobby((Long)session.getAttribute("userId"));
+		if(findUserResumeHobby!=null) {
+			
+			userResumeHobby.setUser(userCommon.getId((Long)session.getAttribute("userId")));
+			userResumeHobbyService.updateResumeHobby(userResumeHobby);
+		}
+		else {
+			userResumeHobbyService.creteUserResumeHobby(session, userResumeHobby);
+		}
 		return "/user/userReasonComment.jsp";
 	}
 
