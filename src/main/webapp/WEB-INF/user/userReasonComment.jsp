@@ -24,6 +24,11 @@
 				<h1>Resume and Hobby</h1>
 			</div>
 			<div id="left_div">
+				<span style="color:red;">
+					<i>
+						<form:errors id="abc" path="userReasonComment.*"/>
+					</i>
+				</span>
 				<form:form modelAttribute="userObj">
 					<p>
 					<div class="input-group input-group-lg">
@@ -74,20 +79,8 @@
 	</div>
 		<script>
 	$(document).ready(function(){
-		$("#user_first_name").attr("disabled",true);
-		$("#user_last_name").attr("disabled",true);
-		$("#user_email").attr("disabled",true);
-		$("#createdAt").attr("disabled",true);
 		$("#info_btn").hide();
 		
-		if($("#reason").val().length>0){
-			$("#reason").attr("disabled",true);
-			$("#success_btn").hide();
-			$("#info_btn").show(1000);
-		}
-		if($("#comment").val().length>0){
-			$("#comment").attr("disabled",true);
-		}
 	})
 	</script>
 </body>

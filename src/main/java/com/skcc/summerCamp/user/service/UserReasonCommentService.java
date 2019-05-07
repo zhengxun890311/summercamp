@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.skcc.summerCamp.common.UserCommon;
 import com.skcc.summerCamp.models.UserReasonComment;
+import com.skcc.summerCamp.models.UserResumeHobby;
 import com.skcc.summerCamp.user.repository.UserReasonCommentRepository;
 
 @Service
@@ -21,5 +22,11 @@ public class UserReasonCommentService {
 	
 	public UserReasonComment findUserReasonComment(Long id) {
 		return userReasonCommentRepository.findUserReasonComment(id);
+	}
+	public void updateUserReasonComment(UserReasonComment userReasonComment) {
+		Long id = userReasonComment.getUser().getId();
+		String user_comment = userReasonComment.getUser_comment();
+		String user_reason = userReasonComment.getUser_reason();
+		userReasonCommentRepository.updateUserReasonComment(id, user_comment, user_reason);
 	}
 }

@@ -135,7 +135,6 @@ public class UserController {
 		}
 		UserResumeHobby findUserResumeHobby = userResumeHobbyService.findResumeHobby((Long)session.getAttribute("userId"));
 		if(findUserResumeHobby!=null) {
-			
 			userResumeHobby.setUser(userCommon.getId((Long)session.getAttribute("userId")));
 			userResumeHobbyService.updateResumeHobby(userResumeHobby);
 		}
@@ -148,8 +147,21 @@ public class UserController {
 	@PostMapping("/addUserReasonComment")
 	public String addUserReasonComment(@ModelAttribute("userObj") User user,
 			@ModelAttribute("userReasonComment") UserReasonComment userReasonComment,
+			BindingResult result,
 			@ModelAttribute("userPhoto") UserPhoto userPhoto, HttpSession session) {
-		userReasonCommentService.createUserReasonCommentRepository(session, userReasonComment);
+
+		userValidator.validateReasonComment(userReasonComment, result);
+		if(result.hasErrors()) {
+			return "/user/userReasonComment.jsp";
+		}
+		UserReasonComment findUserReasonComment = userReasonCommentService.findUserReasonComment((Long)session.getAttribute("userId"));
+		if(findUserReasonComment!=null) {
+			userReasonComment.setUser(userCommon.getId((Long)session.getAttribute("userId")));
+			userReasonCommentService.updateUserReasonComment(userReasonComment);
+		}
+		else {
+			userReasonCommentService.createUserReasonCommentRepository(session, userReasonComment);
+		}
 		return "/user/userPhoto.jsp";
 	}
 
@@ -173,6 +185,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		String url = "images/" + random_photo_name + "." + "jpg";
+		
 		userPhotoService.createUserPhoto(url, session);
 		return "redirect:userInfo";
 	}
