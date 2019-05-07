@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.skcc.summerCamp.models.User;
 import com.skcc.summerCamp.models.UserBasicInfo;
+import com.skcc.summerCamp.models.UserResumeHobby;
 import com.skcc.summerCamp.models.UserUniversityInfo;
 
 
@@ -67,4 +68,13 @@ public class UserValidator implements Validator {
 		}
 	}
 	
+	public void validateResumeHobby(Object target,Errors errors) {
+		UserResumeHobby userResumeHobby=(UserResumeHobby)target;
+		if(userResumeHobby.getUser_hobby().length()<1) {
+			errors.rejectValue("user_hobby", "Match");
+		}
+		if(userResumeHobby.getUser_resume().length()<1) {
+			errors.rejectValue("user_resume", "Match");
+		}
+	}
 }

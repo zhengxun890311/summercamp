@@ -52,6 +52,11 @@
 				</form:form>
 			</div>
 			<div id="right_div">
+			<span style="color:red;">
+					<i>
+						<form:errors id="abc" path="userResumeHobby.*"/>
+					</i>
+				</span>
 				<form:form method="post" action="/addUserResumeHobby"
 					modelAttribute="userResumeHobby">
 					<p>
@@ -74,19 +79,8 @@
 	</div>
 	<script>
 	$(document).ready(function(){
-		$("#user_first_name").attr("disabled",true);
-		$("#user_last_name").attr("disabled",true);
-		$("#user_email").attr("disabled",true);
-		$("#createdAt").attr("disabled",true);
 		$("#info_btn").hide();
-		if($("#resume").val().length>0){
-			$("#resume").attr("disabled",true);
-			$("#success_btn").hide();
-			$("#info_btn").show(1000);
-		}
-		if($("#hobby").val().length>0){
-			$("#hobby").attr("disabled",true);
-		}
+		
 	})
 	</script>
 </body>

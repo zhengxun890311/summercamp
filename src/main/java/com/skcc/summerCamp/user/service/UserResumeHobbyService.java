@@ -22,4 +22,11 @@ public class UserResumeHobbyService {
 	public UserResumeHobby findResumeHobby(Long id) {
 		return userResumeHobbyRepository.findResumeHobby(id);
 	}
+	
+	public void updateResumeHobby(UserResumeHobby userResumeHobby) {
+		Long id = userResumeHobby.getUser().getId();
+		String user_resume = userResumeHobby.getUser_resume();
+		String user_hobby = userResumeHobby.getUser_hobby();
+		userResumeHobbyRepository.updateResumeHobby(id, user_resume, user_hobby);
+	}
 }
