@@ -100,6 +100,10 @@ public class UserController {
 		else {
 			UserBasicInfo newUserBasicInfo = userBasicInfoService.createUserBasicInfo(userBasicInfo, session);
 		}
+		UserUniversityInfo newUserUniversityInfo = userUniversityservice.findUserUnivesityInfo((Long)session.getAttribute("userId"));
+		if(newUserUniversityInfo!=null) {
+			model.addAttribute("userUniversityInfo", newUserUniversityInfo);
+		}
 		return "/user/userUniversity.jsp";
 	}
 
@@ -185,6 +189,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		String url = "images/" + random_photo_name + "." + "jpg";
+		UserPhoto newUserPhoto = userPhotoService.findUserPhoto((Long)session.getAttribute("userId"));
 		
 		userPhotoService.createUserPhoto(url, session);
 		return "redirect:userInfo";

@@ -27,4 +27,9 @@ public class UserPhotoService {
 		return userPhotoRepository.findUserPhoto(id);
 	}
 	
+	public void updateUserPhoto(UserPhoto userPhoto) {
+		Long id = userPhoto.getUser().getId();
+		String user_photo_path = userPhoto.getUser_photo_path();
+		userPhotoRepository.updateUserPhoto(id, user_photo_path);
+	}
 }
