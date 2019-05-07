@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 
 import com.skcc.summerCamp.models.User;
 import com.skcc.summerCamp.models.UserBasicInfo;
+import com.skcc.summerCamp.models.UserReasonComment;
 import com.skcc.summerCamp.models.UserResumeHobby;
 import com.skcc.summerCamp.models.UserUniversityInfo;
 
@@ -75,6 +76,15 @@ public class UserValidator implements Validator {
 		}
 		if(userResumeHobby.getUser_resume().length()<1) {
 			errors.rejectValue("user_resume", "Match");
+		}
+	}
+	public void validateReasonComment(Object target,Errors errors) {
+		UserReasonComment userReasonComment = (UserReasonComment)target;
+		if(userReasonComment.getUser_comment().length()<1) {
+			errors.rejectValue("user_comment", "Match");
+		}
+		if(userReasonComment.getUser_reason().length()<1) {
+			errors.rejectValue("user_reason", "Match");
 		}
 	}
 }
