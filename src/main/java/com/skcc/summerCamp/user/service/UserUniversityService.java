@@ -29,6 +29,6 @@ public class UserUniversityService {
 		String user_major = userUniversityInfo.getUser_major();
 		String user_university_date = userUniversityInfo.getUser_university_date();
 		String user_grade = userUniversityInfo.getUser_grade();
-		
+		userUniversityRepository.updateUserUnivesityInfo(id, user_university, user_major, user_university_date, user_grade);
 	}
 }
