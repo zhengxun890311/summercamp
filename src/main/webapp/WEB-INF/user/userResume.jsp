@@ -23,35 +23,6 @@
 			<div id="title">
 				<h1>Resume and Hobby</h1>
 			</div>
-			<div id="left_div">
-				<form:form modelAttribute="userObj">
-					<p>
-					<div class="input-group input-group-lg">
-						<form:label path="user_first_name">First name</form:label>
-						<form:input id="user_first_name" class="form-control" path="user_first_name" />
-					</div>
-					</p>
-					<p>
-					<div class="input-group input-group-lg">
-						<form:label path="user_last_name">Last name</form:label>
-						<form:input id="user_last_name" class="form-control" path="user_last_name" />
-					</div>
-					</p>
-					<p>
-					<div class="input-group input-group-lg">
-						<form:label path="user_email">Email:</form:label>
-						<form:input id="user_email" class="form-control" path="user_email" />
-					</div>
-					</p>
-					<p>
-					<div class="input-group input-group-lg">
-						<form:label path="createdAt">Create Date</form:label>
-						<form:input id="createdAt" class="form-control" path="createdAt" />
-					</div>
-					</p>
-				</form:form>
-			</div>
-			<div id="right_div">
 			<span style="color:red;">
 					<i>
 						<form:errors id="abc" path="userResumeHobby.*"/>
@@ -74,7 +45,6 @@
 						value="next" />
 					<input id="info_btn" onClick="window.location.href='/findReasonComment'" class="btn btn-info" type="button" value="Next(Submitted)"/>
 				</form:form>
-			</div>
 		</div>
 	</div>
 	<script>
