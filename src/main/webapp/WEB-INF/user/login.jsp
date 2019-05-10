@@ -7,11 +7,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Welcome to summercamp</title>
 	 <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet"/>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body id="body">
+	<div id="header">
+		<img src="<%=request.getContextPath() %>/image/hearder_img.jpg" style="oveerflow:auto;width:1580px;height:100px;"/>
+	</div>
+	<!--
 	<fieldset>
+	  
 	<p><form:errors path="userObj.*"/></p>
 		<form:form method="POST" action="/register" modelAttribute="userObj">
 			<p>
@@ -36,8 +44,9 @@
 			</p>
 			<input type="submit" value="register"/>
 		</form:form>
-	</fieldset>
+	</fieldset> -->
 	
+	<!--  
 	<fieldset>
 		<h1>${errors}</h1>
 		<form:form method="POST" action="/login" modelAttribute="userObj">
@@ -55,5 +64,28 @@
 			<input type="submit" value="login"/>
 		</form:form>
 	</fieldset>
+	-->
+	<div id="login_div">
+		<div>
+			<input id="regBtn" type="submit" class="btn btn-warning" value="Registration"/>
+		</div>
+		<div style="margin-top:10px;padding:10px;">
+	        <form:form method="POST" action="/login" modelAttribute="userObj">
+				<p>
+		            <form:input type="email" class="form-control" path="user_email" placeholder="Please input your username"/>
+				</p>
+				<P>
+					<form:input type="password" class="form-control" path="password" placeholder="Please input your password"/>
+				</P>
+				<input type="submit" class="btn btn-success" value="Login"/>
+			</form:form>
+			<br>
+			<a href="#">Forget Password?</a>
+			<br><hr>
+		</div>
+	</div>
+	<div id="slide_div">
+			
+	</div>
 </body>
 </html>
