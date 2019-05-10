@@ -67,7 +67,7 @@
 	-->
 	<div id="login_div">
 		<div>
-			<input id="regBtn" type="submit" class="btn btn-warning" value="Registration"/>
+			<input id="regBtn" type="submit" class="btn btn-warning" value="Registration" style="border-radius:10px"/>
 		</div>
 		<div style="margin-top:10px;padding:10px;">
 	        <form:form method="POST" action="/login" modelAttribute="userObj">
@@ -85,7 +85,11 @@
 		</div>
 	</div>
 	<div id="slide_div">
+		<div class="carousel slide" data-ride="carousel">
 			
+			<img src="images/0bd15327209849698e91e6ce0a2e04b0.jpg"/>
+			
+		</div>
 	</div>
 </body>
 </html>
