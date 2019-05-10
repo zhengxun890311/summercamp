@@ -1,0 +1,36 @@
+#body{
+	background-color: #E0E2BD;
+	width:1580px;
+	height:800px;
+}
+#header{
+	width:1580px;
+	height:100px;
+	background-color:#578ACC;
+	margin: 0 auto;
+}
+
+#regBtn{
+	width:90%;
+	height:70px;
+	margin-left:5%;
+	margin-top:5%;
+}
+
+#login_div{
+	background:linear-gradient(to bottom right,#FFFFFE,#F3F4ED);
+	width:280px;
+	height:320px;
+	margin-left:20%;
+	display:inline-block;
+	vertical-align:80px;
+}
+
+#slide_div{
+	background:linear-gradient(to bottom right,#FFFFFE,#F3F4ED);
+	width:600px;
+	height:400px;
+	margin-top:10px;
+	margin-left:70px;
+	display:inline-block;
+}
