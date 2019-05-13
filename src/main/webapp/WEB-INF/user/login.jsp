@@ -22,34 +22,6 @@
 		<img src="<%=request.getContextPath()%>/image/hearder_img.jpg"
 			style="oveerflow: auto; width: 1580px; height: 100px;" />
 	</div>
-	<!--
-	<fieldset>
-	  
-	<p><form:errors path="userObj.*"/></p>
-		<form:form method="POST" action="/register" modelAttribute="userObj">
-			<p>
-				<form:label path="user_first_name">first name</form:label>
-				<form:input type="text" path="user_first_name" />
-			</p>
-			<p>
-				<form:label path="user_last_name">last name</form:label>
-				<form:input type="text" path="user_last_name" />
-			</p>
-			<p>
-				<form:label path="user_email">Email:</form:label>
-				<form:input type="email" path="user_email"/>
-			</p>
-			<p>
-				<form:label path="password">Password:</form:label>
-				<form:password path="password" />
-			</p>
-			<p>
-				<form:label path="passwordConfirmation">Password Confirmation:</form:label>
-				<form:password path="passwordConfirmation" />
-			</p>
-			<input type="submit" value="register"/>
-		</form:form>
-	</fieldset> -->
 	<div id="login_div">
 		<div>
 			<input id="regBtn" type="button" class="btn btn-warning"
@@ -129,35 +101,34 @@
 			<hr>
 		</div>
 	</div>
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="item active">
-					<img src="<%=request.getContextPath()%>/image/la.jpg" alt="Los Angeles">
-				</div>
-
-				<div class="item">
-					<img src="<%=request.getContextPath()%>/image/chicago.jpg" alt="Los Angeles">
-				</div>
-
-				<div class="item">
-					<img src="<%=request.getContextPath()%>/image/ny.jpg" alt="Los Angeles">
-				</div>
-			</div>
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="right carousel-control" href="#myCarousel"
-				data-slide="next"> <span
-				class="glyphicon glyphicon-chevron-right"></span> <span
-				class="sr-only">Next</span>
-			</a>
+	<div id="slide_div">
+		<img class="d-block w-100" src="<%= request.getContextPath() %>/images/la.jpg" style="width:600px;height:350px;"
+		 alt="First slide">
+	</div>
+	<div id="about">
+		<img src="<%=request.getContextPath() %>/images/aboutbg.png"/>
+		<h2 id="summercamp" style="color:white">Summer Camp</h2>
+		<div id="about_content">
+			<p>
+				A summer camp or sleepaway camp is a supervised program for children or teenagers conducted during the summer months in some countries
+			</p>
+			<p>
+				The traditional view of a summer camp as a woody place with hiking, canoeing, and campfires is changing, with greater acceptance of newer 
+			</p>
+			<p>
+				types of summer camps that offer a wide variety of specialized activities.or example, there are camps for the performing arts, music, magic,
+			</p>
+			<p>
+				computer programming, language learning, mathematics, children with special needs, and weight loss. In 2006, the American Camp Association 
+			</p>
+			<p>
+				reported that 75 percent of camps added new programs.
+			</p>
 		</div>
+		<h5 style="margin-left:20%;margin-top:0%">
+			© 2019 Skyler Chang, Pasadena,CA . All Rights Reserved.  Terms & Privacy.
+		</h5>
+		
+	</div>
 </body>
 </html>

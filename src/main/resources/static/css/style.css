@@ -29,8 +29,25 @@
 #slide_div{
 	background:linear-gradient(to bottom right,#FFFFFE,#F3F4ED);
 	width:600px;
-	height:400px;
-	margin-top:10px;
+	height:350px;
+	margin-top:0px;
 	margin-left:70px;
+	vertical-align:top;
 	display:inline-block;
+}
+#about{
+	position:absolute;
+	margin-left:20%;
+	margin-top:-20px;
+}
+#summercamp{
+	position:absolute;
+	top:7%;
+	left:2%;
+}
+#about_content{
+	color:black;
+	position:absolute;
+	top:30%;
+	left:4%;
 }
