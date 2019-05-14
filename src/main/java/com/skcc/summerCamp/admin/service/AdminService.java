@@ -17,4 +17,19 @@ public class AdminService {
 		adminInfo.setAdmin_password(hashedPwd);
 		return adminRepository.save(adminInfo);
 	}
+	
+	public boolean authenticateUser(String username,String password) {
+		AdminInfo adminInfo = adminRepository.findAdminInfoByUsername(username);
+		if(adminInfo==null) {
+			return false;
+		}
+		else {
+			if(BCrypt.checkpw(password, adminInfo.getAdmin_password())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
 }

@@ -21,6 +21,15 @@
 	<div id="header">
 		<img src="<%=request.getContextPath()%>/image/hearder_img.jpg"
 			style="oveerflow: auto; width: 1580px; height: 100px;" />
+		<div id="loginNavi" style="position:absolute;">
+			<a href="/admin" style="text-decoration:none">
+				<span>
+					<h3>
+						Admin Login
+					</h3>
+				</span>
+			</a>
+		</div>
 	</div>
 	<div id="login_div">
 		<div>
@@ -87,14 +96,14 @@
 			<h5 style="color: red;">${errors}</h5>
 			<form:form method="POST" action="/login" modelAttribute="userObj">
 				<p>
-					<form:input type="email" class="form-control" path="user_email"
+					<form:input id="email" type="email" class="form-control" path="user_email"
 						placeholder="Please input your username" />
 				</p>
 				<P>
 					<form:input type="password" class="form-control" path="password"
 						placeholder="Please input your password" />
 				</P>
-				<input type="submit" class="btn btn-success" value="Login" />
+				<input id="login" type="submit" class="btn btn-success" value="Login" />
 			</form:form>
 			<br>
 			<a href="#">Forget Password?</a> <br>
@@ -128,7 +137,11 @@
 		<h5 style="margin-left:20%;margin-top:0%">
 			© 2019 Skyler Chang, Pasadena,CA . All Rights Reserved.  Terms & Privacy.
 		</h5>
-		
 	</div>
+	<script>
+		$(document).ready(function(){
+			
+		})
+	</script>
 </body>
 </html>
