@@ -43,11 +43,17 @@ public class AdminController {
 	public String adminLogin(@ModelAttribute("adminObj") AdminInfo adminInfo,
 							HttpSession session,
 							Model model) {
-		if(userService.authenticateUser(adminInfo.getAdmin_username(), adminInfo.getAdmin_password())) {
-			return "";
+		boolean check = adminService.authenticateUser(adminInfo.getAdmin_username(), adminInfo.getAdmin_password());
+		if(check) {
+			session.setAttribute("username", adminInfo.getAdmin_username());
+			model.addAttribute("username", adminInfo.getAdmin_username());
+			List<User> userList = userService.findAllUser();
+			model.addAttribute("userList", userList);
+			return "/admin/admin.jsp";
 		}
 		else {
-			return "";
+			System.out.println(22222);
+			return "/admin/adminLogin.jsp";
 		}
 	}
 }
