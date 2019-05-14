@@ -7,7 +7,8 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/lib/themes/bootstrap/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="/lib/themes/bootstrap/easyui.css" />
 <link rel="stylesheet" type="text/css" href="/lib/themes/icon.css" />
 <link rel="stylesheet" type="text/css" href="/lib/themes/color.css" />
 <script type="text/javascript" src="/lib/jquery.min.js"></script>
@@ -17,59 +18,84 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="easyui-layout" style="width: 400px; height: 200px;">
+	<div class="easyui-layout" style="width: 1600px; height: 750px;">
+
+		<!-- West part -->
 		<div region="west" split="true" title="Navigator"
-			style="width: 150px;">
-			<p style="padding: 5px; margin: 0;">Select language:</p>
+			style="width: 300px;">
+			<p style="padding: 5px; margin: 0;">Select Operation:</p>
 			<ul class="easyui-tree">
 				<li>
-					<span>Folder</span>
-					<ul>
-						<li><span href="www.baidu.com">SubFolder 1</span></li>
-						<li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
-						<li><a href="javascript:void(0)" onclick="showcontent('C#')">C#</a></li>
-					</ul>
-				</li>
+					<span>Operation</span>
+						<ul>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('tweets','http://www.google.com')">Like</a></li>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('amazon','http://www.amazon.com')">Reply</a></li>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('facebook','http://www.facebook.com')">User</a></li>
+						</ul>
+					</li>
+			</ul>
+			<ul class="easyui-tree">
+				<li>
+					<span>Operation</span>
+						<ul>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('google','http://www.google.com')">Like</a></li>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('amazon','http://www.amazon.com')">Reply</a></li>
+							<li><a href="javascript:void(0)"
+								onclick="addTab('facebook','http://www.facebook.com')">User</a></li>
+						</ul>
+					</li>
 			</ul>
 		</div>
-		<div id="content" region="center" title="Language"
-			style="padding: 5px;"></div>
-	</div>
 
-	<table id="dg" title="User List" class="easyui-datagrid"
-		url="/user/list" toolbar="#toolbar" pagination="true"
-		rownumbers="true" fitColumns="true" singleSelect="true">
-		<thead>
-			<tr>
-				<th field="id" width="50">ID</th>
-				<th field="firstName" width="50">First Name</th>
-				<th field="lastName" width="50">Last Name</th>
-				<th field="email" width="50">Email</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${userList}" var="user">
-				<tr>
-					<td><c:out value="${user.id}"></c:out></td>
-					<td><c:out value="${user.user_first_name}"></c:out></td>
-					<td><c:out value="${user.user_last_name}"></c:out></td>
-					<td><c:out value="${user.user_email}"></c:out></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-		<div id="toolbar">
+		<!-- midddle part this is user table  -->
+		<div region="center" split="true" title="Admin Operation">
+			<div id="tt" class="easyui-tabs"
+				style="width: 1500px; height: 700px;">
+				<div title="Home">
+					<table id="dg" title="User List" class="easyui-datagrid"
+						url="/user/list" toolbar="#toolbar" pagination="true"
+						rownumbers="true" fitColumns="true" singleSelect="true"
+						style="width: 1500px; height: 800px">
+						<thead>
+							<tr>
+								<th field="id" width="5px">ID</th>
+								<th field="email" width="20px">Email</th>
+								<th field="firstName" width="20px" style="text-align: center">First Name</th>
+								<th field="lastName" width="20px">Last Name</th>
+								<th field="createAt" width="20px">Create Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${userList}" var="user">
+								<tr>
+									<td><c:out value="${user.id}"></c:out></td>
+									<td><c:out value="${user.user_email}"></c:out></td>
+									<td><c:out value="${user.user_first_name}"></c:out></td>
+									<td><c:out value="${user.user_last_name}"></c:out></td>
+									<td><c:out value="${user.createdAt}"></c:out></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	<div id="toolbar">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-add" plain="true" onClick="newUser()">Create </a>
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-edit" plain="true" onClick="editUser()">Edit </a>
-		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-add" plain="true" onClick="newUser()">Create </a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-edit" plain="true" onClick="editUser()">Edit </a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="false" onClick="destroyUser()">
 			Remove </a>
-		<div id="dlg" class="easyui-dialog" style="width: 400px"
+		<div id="dlg" class="easyui-dialog" style="width:400px;height:500px;"
 			data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
-			<form id="fm" method="post" novalidate
-				style="margin: 0; padding: 20px 50px">
+			<form id="fm" method="post" novalidate style="margin: 0; padding: 20px 50px">
 				<h3>User Information</h3>
 				<div style="margin-bottom: 10px">
 					<input name="firstName" class="easyui-textbox" required="true"
@@ -87,6 +113,14 @@
 					<input name="email" class="easyui-textbox" required="true"
 						label="email:" style="width: 100%" />
 				</div>
+				<div style="margin-botton: 10px">
+					<input name="birthday" class="easyui-textbox" required="true"
+						  label="birthday" style="width:100%"/>
+				</div>
+				<div style="margin-botton: 10px;;margin-top:10px;">
+					<input name="password" class="easyui-textbox" required="true"
+						  label="password" style="width:100%"/>
+				</div>
 			</form>
 		</div>
 		<div id="dlg-buttons">
@@ -98,9 +132,19 @@
 		</div>
 	</div>
 	<script>
-		function showcontent(language){
-	        $('#content').html('Introduction to ' + language + ' language');
-	    }	
+		function addTab(title, url) {
+			if ($('#tt').tabs('exists', title)) {
+				$('#tt').tabs('select', title);
+			} else {
+				var content = '<iframe scrolling="auto" frameborder="0"  src="'
+						+ url + '" style="width:100%;height:100%;"></iframe>';
+				$('#tt').tabs('add', {
+					title : title,
+					content : content,
+					closable : true
+				});
+			}
+		}
 		function newUser() {
 			$("#dlg").dialog('open').dialog('center').dialog('setTitle',
 					'New User')
