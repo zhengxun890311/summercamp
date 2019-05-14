@@ -29,15 +29,25 @@ public class AdminController {
 		return "/admin/adminLogin.jsp";
 	}
 	@PostMapping("/adminRegister")
-	public String adminHome(@ModelAttribute("adminObj") AdminInfo adminInfo,
+	public String adminRegister(@ModelAttribute("adminObj") AdminInfo adminInfo,
 							HttpSession session,
 							Model model) {
-		System.out.println(adminInfo.getAdmin_username());
-		System.out.println(adminInfo.getAdmin_password());
 		AdminInfo newAdminInfo = adminService.createAdmin(adminInfo);
 		session.setAttribute("user_name", newAdminInfo.getAdmin_username());
 		List<User> userList = userService.findAllUser();
 		model.addAttribute("userList", userList);
 		return "/admin/admin.jsp";
+	}
+	//admin login function
+	@PostMapping("/adminLogin")
+	public String adminLogin(@ModelAttribute("adminObj") AdminInfo adminInfo,
+							HttpSession session,
+							Model model) {
+		if(userService.authenticateUser(adminInfo.getAdmin_username(), adminInfo.getAdmin_password())) {
+			return "";
+		}
+		else {
+			return "";
+		}
 	}
 }
