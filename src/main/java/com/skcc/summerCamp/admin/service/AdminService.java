@@ -6,11 +6,16 @@ import org.springframework.stereotype.Service;
 
 import com.skcc.summerCamp.admin.repository.AdminRepository;
 import com.skcc.summerCamp.models.AdminInfo;
+import com.skcc.summerCamp.models.User;
+import com.skcc.summerCamp.user.repository.UserRepository;
 
 @Service
 public class AdminService {
 	@Autowired
 	private AdminRepository adminRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	public AdminInfo createAdmin(AdminInfo adminInfo) {
 		String hashedPwd = BCrypt.hashpw(adminInfo.getAdmin_password(), BCrypt.gensalt());
@@ -32,4 +37,10 @@ public class AdminService {
 			}
 		}
 	}
+	
+	/*public User adminCreateUser(User user) {
+		String hashedPwd = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setPassword(hashedPwd);
+		return userRepository.save(user);
+	}*/
 }
