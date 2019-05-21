@@ -9,4 +9,6 @@ public interface AdminRepository extends CrudRepository<AdminInfo,Long> {
 	
 	@Query(value="select * from admin_info where admin_username=?1",nativeQuery=true)
 	AdminInfo findAdminInfoByUsername(String username);
+	
+	
 }
