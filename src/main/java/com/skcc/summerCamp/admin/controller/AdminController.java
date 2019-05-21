@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.skcc.summerCamp.admin.service.AdminService;
 import com.skcc.summerCamp.models.AdminInfo;
 import com.skcc.summerCamp.models.User;
+import com.skcc.summerCamp.models.UserBasicInfo;
 import com.skcc.summerCamp.user.service.UserService;
+import com.skcc.summerCamp.validator.UserValidator;
 
 @Controller
 public class AdminController {
@@ -23,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserValidator userValidator;
 	
 	@RequestMapping("/admin")
 	public String adminLogin(@ModelAttribute("adminObj") AdminInfo adminInfo) {
@@ -52,8 +58,20 @@ public class AdminController {
 			return "/admin/admin.jsp";
 		}
 		else {
-			System.out.println(22222);
 			return "/admin/adminLogin.jsp";
+		}
+	}
+	
+	@PostMapping("/newUser")
+	public String newUser(@ModelAttribute("userObj") User userObj,
+			BindingResult result) {
+		userService.createUser(userObj);
+		userValidator.validate(userObj, result);
+		if (result.hasErrors()) {
+			return "/admin/admin.jsp";
+		}
+		else {
+			return "/admin/admin.jsp";
 		}
 	}
 }
