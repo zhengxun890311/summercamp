@@ -173,28 +173,27 @@
 			}
 	
 			function destroyUser() {
-				var row = $("#dg").datagrid('getSelected');
-				alert(row);
-				$.messager.confirm('Confirm',
-					'Are you sure you want to remove this data',
-					function(r) {
-						if (r) {
-							$.post('/user/delete', {
-								var row = $("#dg").datagrid('getSelected');
-								id : row.id
-							}, function(result) {
-								if (result.success) {
-									$('#dg').datagrid('reload'); // reload the user data
-								} else {
-									$.messager.show({
-										// show error message
-										title : 'Error',
-										msg : result.errorMsg
-									});
+				var row = $('#dg').datagrid('getSelected');
+				if (row) {
+					$.messager.confirm('Confirm',
+							'Are you sure you want to remove this data',
+							function(r) {
+								if (r) {
+									$.post('/user/delete', {
+										id : row.id
+									}, function(result) {
+										if (result.success) {
+											$('#dg').datagrid('reload'); // reload the user data
+										} else {
+											$.messager.show({
+												// show error message
+												title : 'Error',
+												msg : result.errorMsg
+											});
+										}
+									}, 'json');
 								}
-							}, 'json');
-						}
-					});
+							});
 				}
 			}
 		</script>
