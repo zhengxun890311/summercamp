@@ -1,7 +1,7 @@
 #body{
 	background-color: #E0E2BD;
 	width:1580px;
-	height:800px;
+	height:700px;
 }
 #header{
 	width:1580px;
@@ -38,7 +38,7 @@
 #about{
 	position:absolute;
 	margin-left:20%;
-	margin-top:-20px;
+	margin-top:-30px;
 }
 #summercamp{
 	position:absolute;
