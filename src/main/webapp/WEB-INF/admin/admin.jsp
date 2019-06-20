@@ -173,21 +173,20 @@
 			}
 	
 			function destroyUser() {
-				var row = $("#dg").datagrid('getSelected');
-				alert(row);
-				$.messager.confirm('Confirm',
-					'Are you sure you want to remove this data',
-					function(r) {
+				var row = $('#dg').datagrid('getSelected');
+				if (row) {
+					alert(row.id)
+					$.messager.confirm('Confirm',
+						'Are you sure you want to remove this data',
+						function(r) {
 						if (r) {
-							$.post('/user/delete', {
-								var row = $("#dg").datagrid('getSelected');
+							$.post('/user/deleteUser', {
 								id : row.id
 							}, function(result) {
 								if (result.success) {
 									$('#dg').datagrid('reload'); // reload the user data
 								} else {
 									$.messager.show({
-										// show error message
 										title : 'Error',
 										msg : result.errorMsg
 									});
